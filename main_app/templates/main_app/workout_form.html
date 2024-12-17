@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load tailwind_filters %}
+{% load crispy_forms_tags %}
+
+{% load static %}
+
+{% block head %}
+
+{% endblock head %}
+
+
+
+{% block content %}
+<div class='flex justify-center mt-10 font-quattrocento'>
+    <h1 class='text-5xl '>Workout Form</h1>
+</div>
+    {% crispy form %} 
+
+    
+    {% comment %} <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#id_muscle_group').change(function() {
+                const muscleGroup = $(this).val();
+                
+                $.ajax({
+                    url: "{% url 'get_workouts_by_muscle_group' %}",
+                    data: {
+                        'muscle_group': muscleGroup
+                    },
+                    success: function(response) {
+                        const workoutSelect = $('#id_name');
+                        workoutSelect.empty();
+                        
+                        workoutSelect.append($('<option>', { 
+                            value: '',
+                            text : 'Select a workout'
+                        }))
+                        response.workouts.forEach(function(workout) {
+                            workoutSelect.append($('<option>', { 
+                                value: workout,
+                                text : workout 
+                            }))
+                        })
+                    }
+                })
+            })
+        })
+    </script> {% endcomment %}
+{% endblock content %}
+
+
+
